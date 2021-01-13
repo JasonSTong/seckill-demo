@@ -4,6 +4,8 @@ MAINTAINER test<test@qq.com>
 
 ENV CODE /code
 ENV WORK /code/work
+RUN /bin/cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+RUN echo "Asia/Shanghai" > /etc/timezone
 RUN mkdir -p $CODE \
     && mkdir -p $WORK
 
