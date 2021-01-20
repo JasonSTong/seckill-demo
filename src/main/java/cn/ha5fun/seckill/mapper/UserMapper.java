@@ -52,4 +52,11 @@ public interface UserMapper extends BaseMapper<User> {
      * @Return Boolean
      */
     User selBeforeRegister(User user);
+    /**
+     * @Author chencong
+     * @Version 1.0.0
+     * @Description  登录后更新用户信息
+     * @Date 2021/1/17 2:53 下午
+     */
+    int updateLoginInfo(User user);
 }

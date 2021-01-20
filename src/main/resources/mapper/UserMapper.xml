@@ -89,4 +89,7 @@
             </if>
         </where>
     </select>
+    <update id="updateLoginInfo" parameterType ="cn.ha5fun.seckill.pojo.User">
+        update t_user set last_login_date = #{lastLoginDate} , login_count = #{loginCount} where id = #{id}
+    </update>
 </mapper>

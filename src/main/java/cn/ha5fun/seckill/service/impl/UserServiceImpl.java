@@ -6,6 +6,7 @@ import cn.ha5fun.seckill.service.IUserService;
 import cn.ha5fun.seckill.utils.CookieUtils;
 import cn.ha5fun.seckill.utils.RedisUtils;
 import cn.ha5fun.seckill.utils.UUIDUtils;
+import cn.ha5fun.seckill.utils.UserUtils;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.extern.slf4j.Slf4j;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -53,8 +55,13 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     @Override
     public Boolean loginWithPhoneOrEmail(User user, HttpServletRequest request, HttpServletResponse response) {
         User getUser = userMapper.loginWithPhoneOrEmail(user);
-
+        // int updateUser = loginUpdateUserInfo(getUser);
+        // TODO if 查不出来, 应该有一个统一返回类型
         if (getUser != null) {
+            // 更新 用户信息 -> 但是可以使用mybatis-plus 插件update
+            getUser.setLoginCount(getUser.getLoginCount() + 1).setLastLoginDate(new Date());
+            userMapper.updateLoginInfo(getUser);
+            // 将用户信息写入
             String ticket = UUIDUtils.getUuid();
             request.getSession().setAttribute(ticket, getUser);
             CookieUtils.setCookie(request, response, "userTicket", ticket);
