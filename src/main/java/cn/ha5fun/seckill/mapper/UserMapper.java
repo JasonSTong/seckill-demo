@@ -24,6 +24,7 @@ public interface UserMapper extends BaseMapper<User> {
      * @Date 2020/12/19 10:00 下午
      * @Return List<User>
      */
+
     List<User> selAllWithoutPass();
     /**
      * @Author chencong
