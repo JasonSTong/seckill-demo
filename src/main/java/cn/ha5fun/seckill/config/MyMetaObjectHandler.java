@@ -17,13 +17,13 @@ import java.time.LocalDateTime;
 @Slf4j
 @Component
 public class MyMetaObjectHandler implements MetaObjectHandler {
-
+    // mybatis 自动插入的数据 -> 需要在entity中配置@TableField
     @Override
     public void insertFill(MetaObject metaObject) {
         log.info("start insert fill ....");
         this.strictInsertFill(metaObject, "createTime", LocalDateTime.class, LocalDateTime.now()); // 起始版本 3.3.0(推荐使用)
     }
-
+    // mybatis 自动插入的数据 -> 需要在entity中配置@TableField(.. fill = FieldFill.INSERT)
     @Override
     public void updateFill(MetaObject metaObject) {
         log.info("start update fill ....");

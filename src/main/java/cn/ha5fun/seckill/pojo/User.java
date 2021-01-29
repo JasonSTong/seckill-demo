@@ -67,6 +67,7 @@ public class User implements Serializable {
      * 注册时间
      * !!仅注册时调用
      */
+    @TableField(fill = FieldFill.UPDATE)
     private Date registerDate  = new Date();
 
     /**

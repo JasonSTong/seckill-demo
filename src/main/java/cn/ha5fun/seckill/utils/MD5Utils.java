@@ -87,9 +87,9 @@ public class MD5Utils {
     @Test
     public void testMD5(){
 
-        String fromPass = inputPassToFromPass("123456", getSalt("chensitong"));
+        String fromPass = inputPassToFromPass("password", getSalt("chensitong"));
         String dbPass = fromPassToDBPass(fromPass, getSalt("chensitong"));
-        String dbPass1 = inputPassToDBPass("123456", getSalt("chensitong"));
+        String dbPass1 = inputPassToDBPass("password", getSalt("chensitong"));
         System.out.println(dbPass1);
         System.out.println(fromPass);
         System.out.println(dbPass);
